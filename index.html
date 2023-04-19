@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>X/O</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+<!-- add web icon -->
+  <link rel="Shortcut Icon" type="image/png" href="/images/icon.png" />
+  
+<!--// add web icon //-->
+
+  <!-- animate css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <!--// animate css //-->
+
+  <!-- bootstrap CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+    crossorigin="anonymous"></script>
+  <!--// bootstrap CDN //-->
+  <!-- google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+  <!--// google font //-->
+</head>
+
+<body onload="applyStoredTheme()">
+  <div id="main">
+
+<!-- nav bar -->
+    <div id="turn-div" class="shadow">
+      <div id="play-mode">
+        <span id="game-mode-icon" class="material-symbols-outlined">group</span>
+      </div>    
+      <div id="turn">
+         <span id="my-turn">X</span> Turn
+      </div>
+      <div id="option-btn-div">
+         <button id="option-btn" data-bs-target="#option-modal" data-bs-toggle="modal">
+           <span>|||</span>
+         </button>
+      </div>      
+    </div>
+<!--// nav bar //-->
+    
+<!-- board container -->
+    <div id="container" class="container shadow">
+      <div id="inner-container">
+        <div class="square" style="border-top: none; border-left: none">
+          <div id="1" class="plates animate__animated animate__repeat-2" value="1">
+            X
+          </div>
+        </div>
+        <div class="square" style="border-top: none">
+          <div id="2" class="plates animate__animated animate__repeat-2" value="2">
+            X
+          </div>
+        </div>
+        <div class="square" style="border-top: none; border-right: none">
+          <div id="3" class="plates animate__animated animate__repeat-2" value="3">
+            X
+          </div>
+        </div>
+        <div class="square" style="border-left: none">
+          <div id="4" class="plates animate__animated animate__repeat-2" value="4">
+            X
+          </div>
+        </div>
+        <div class="square">
+          <div id="5" class="plates animate__animated animate__repeat-2" value="5">
+            X
+          </div>
+        </div>
+        <div class="square" style="border-right: none">
+          <div id="6" class="plates animate__animated animate__repeat-2" value="6">
+            X
+          </div>
+        </div>
+        <div class="square" style="border-bottom: none; border-left: none">
+          <div id="7" class="plates animate__animated animate__repeat-2" value="7">
+            X
+          </div>
+        </div>
+        <div class="square" style="border-bottom: none" value="8">
+          <div id="8" class="plates animate__animated animate__repeat-2" value="8">
+            X
+          </div>
+        </div>
+        <div class="square" style="border-bottom: none; border-right: none">
+          <div id="9" class="plates animate__animated animate__repeat-2" value="9">
+            X
+          </div>
+        </div>
+      </div>
+    </div>
+<!--// board container //-->
+    
+<!-- buttons div -->
+    <div id="btns-div">
+       <button id="reset-btn" class="btns shadow" data-bs-target="#reset-modal" data-bs-toggle="modal">Reset</button>
+      <button onclick="switchTeam()" id="switch-btn" class="btns shadow" data-bs-target="#swichTeamModal" data-bs-toggle="modal">Switch</button>
+    </div> 
+<!--// buttons div //-->
+  </div>
+
+<!-- MODALS -->
+  
+<!-- option modal -->
+
+<div id="option-modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+    <div class="modal-content modal-bg-root ">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">
+          Option menu
+        </h1>
+        <button type="button" class="modal-x-btn" data-bs-dismiss="modal" aria-label="Close">
+          <span class="material-symbols-outlined icon-costume">
+close
+          </span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <button onclick="changeGameMode()" id="game-mode-btn" class="btn  btn-primary col-12" data-bs-dismiss="modal">
+           <div id="mode-btn-label">
+              Play against device
+           </div> 
+           <div id="mode-btn-icon">
+              <span class="material-symbols-outlined">group</span>
+           </div>  
+        </button>
+        <hr/>
+        
+      </div>
+      <div id="option-modal-footer" class="modal-footer">
+        <div id="setting-div">
+           <div id="theme-btn-div" class="form-check form-switch">
+  <input onclick="changeTheme()" id="theme-switch" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">Change Theme</label>
+           </div>
+           <div id="sound-btn-div" class="form-check form-switch">
+  <input onclick="disableSound()" id="sound-switch" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">Sound Effects</label>
+           </div>
+        </div>
+        
+        <div id="credit-div" class="col-6">
+          Developed by 
+          <span>Mehdi Hassan</span>
+        </div>        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--// option modal //-->
+
+<!-- switch team modal -->
+  
+  <div class="modal fade" id="swichTeamModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modal-bg-root">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">select player</h1>
+        <button type="button" class="modal-x-btn" data-bs-dismiss="modal" aria-label="Close">
+          <span class="material-symbols-outlined icon-costume">
+close
+          </span>
+        </button>
+      </div>
+      <div class="modal-body d-flex justify-content-evenly align-items-center">
+        <div id="modal-btns">
+<!-- modal btns here will be nested here-->
+        </div>
+        <input id="hidden-input" type="hidden"/>
+      </div>
+      <div class="modal-footer">
+        <button id="confirm-btn" class="btn" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+<!--// switch team modal //-->
+
+<!-- alert modal -->
+  
+  <div class="modal fade" id="alert-modal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modal-bg-root">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">
+          <div id="alert-modal-header">
+             Congrats!!
+          </div>    
+        </h1>
+        <button type="button" class="modal-x-btn" data-bs-dismiss="modal" aria-label="Close">
+          <span class="material-symbols-outlined icon-costume">
+close
+          </span>
+        </button>
+      </div>
+      <div class="modal-body d-flex justify-content-evenly align-items-center">
+        <div id="alert-modal-body">
+           X won
+        </div> 
+      </div>
+      <div class="modal-footer">
+        <button id="confirm-btn" class="btn" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+<!--// alert modal //-->
+
+<!-- reset modal -->
+
+  <div class="modal fade" id="reset-modal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modal-bg-root">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">
+          <div id="alert-modal-header">
+             Reset Board!!
+          </div>    
+        </h1>
+        <button type="button" class="modal-x-btn" data-bs-dismiss="modal" aria-label="Close">
+          <span class="material-symbols-outlined icon-costume">
+close
+          </span>
+        </button>
+      </div>
+      <div class="modal-body d-flex justify-content-evenly align-items-center">
+        <div class="modal-body">
+        do you want to reset board and start a new game?
+        </div> 
+      </div>
+      <div class="modal-footer">
+        <button id="no-reset-btn" type="button" class="btn btn-primary" data-bs-dismiss="modal" value="false">No</button>
+        <button onclick="resetBoard()" id="yes-reset-btn" type="button" class="btn btn-danger" value="true" data-bs-dismiss="modal">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+<!-- reset modal -->
+
+<!--// MODALS //-->
+  <script src="script.js"></script>
+</body>
+
+</html>
